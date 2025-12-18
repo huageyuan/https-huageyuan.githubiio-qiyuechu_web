@@ -1,0 +1,39 @@
+.Web06-container {                        /* 全屏大图容器 */
+  margin-top: 80px;                      /* 避开顶部固定导航80px，防止被遮挡 */
+  min-height: calc(100vh - 80px);        /* 至少占满“屏幕高度-80px”，保证背景图始终铺满可视区 */
+  display: flex;                         /* Flex布局，让子元素（卡片）居中 */
+  align-items: center;                   /* 垂直居中 */
+  justify-content: center;               /* 水平居中 */
+  padding: 40px;                         /* 内边距40px，避免卡片贴边 */
+}
+/*========== 实色悬浮卡片（无模糊） ==========*/
+.web06-container {
+    width: 100%;
+    max-width: 1500px;
+    display: flex;
+    flex-direction: row-reverse;   /* 关键：整体顺序反转 → 右图左字 */
+    gap: 60px;
+    align-items: center;
+    padding: 60px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/*========== 右侧图 66% ==========*/
+.web06-right-box {          /* 类名顺手改成 right-box，语义对应 */
+    flex: 0 0 66%;
+    border-radius: 12px;
+    overflow: hidden;
+}
+.web06-right-box img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*========== 左侧文字 34% ==========*/
+.web06-text-content {
+    flex: 1;            /* 剩余空间全给文字，现在它在左边 */
+}

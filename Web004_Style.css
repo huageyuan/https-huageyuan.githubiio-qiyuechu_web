@@ -1,0 +1,26 @@
+/*========== 主视觉大背景区域 ==========*/
+.web04-container {                        /* 全屏大图容器 */
+  margin-top: 80px;                      /* 避开顶部固定导航80px，防止被遮挡 */
+  min-height: calc(100vh - 80px);        /* 至少占满“屏幕高度-80px”，保证背景图始终铺满可视区 */
+  display: flex;                         /* Flex布局，让子元素（卡片）居中 */
+  align-items: center;                   /* 垂直居中 */
+  justify-content: center;               /* 水平居中 */
+  padding: 40px;                         /* 内边距40px，避免卡片贴边 */
+}
+
+.web04-box {
+    width: 100%;                 /* 占满卡片宽度 */
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;               /* 图片本身再居中 */
+    justify-content: center;
+}
+
+.web04-box img {
+    /* 图片本身 */
+    width: 85%;
+    height: auto;
+    /* 高度自动，等比缩放不变形 */
+    display: block;
+    /* 去掉图片底部默认3px缝隙，防止出现白边 */
+}
