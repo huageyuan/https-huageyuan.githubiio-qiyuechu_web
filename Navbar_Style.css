@@ -1,143 +1,280 @@
-/* 1️⃣ 全局变量：以后想统一改高度、间距只动这一行即可 */
+/* 1️⃣ 全局变量 */
 :root {
-  --nav-height: 60px;   /* 导航条整体高度 */
-  --gap: 22px;          /* 菜单项之间的左右间距 */
+  --nav-height: 60px;
+  --gap: 22px;
+  --mobile-gap: 16px;  /* 新增：移动端间距 */
 }
 
 /* 2️⃣ 整个导航条的主容器 */
 .nav {
-  display: flex;        /* 弹性布局，子元素横排 */
-  align-items: center;  /* 垂直居中 */
-  height: var(--nav-height);   /* 使用变量，后期一改全改 */
-  padding: 0 24px;      /* 左右留空白，让内容不贴边 */
-  background: #fff;     /* 白色底 */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, .08); /* 淡淡的阴影，增加层级感 */
-  font-size: 14px;      /* 整体字号 */
+  display: flex;
+  align-items: center;
+  height: var(--nav-height);
+  padding: 0 24px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+  font-size: 14px;
 }
 
-/* 3️⃣ 左侧 logo 区域 */
+/* 3️⃣ 左侧 logo 区域 - 修改为flex布局 */
 .nav__left {
-  flex-shrink: 0;       /* 不允许被压缩，保证 logo 始终完整 */
-  margin-right: auto;   /* 自动把右侧元素顶开，实现“靠左” */
-  gap : 8px;
+  display: flex;          /* 新增：flex布局 */
+  align-items: center;    /* 新增：垂直居中 */
+  flex-shrink: 0;
+  margin-right: auto;
+  gap: 8px;              /* 改用gap代替margin */
 }
+
 .logo-icon {
-    width: 26px;
-    height:26px;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;        /* 新增：防止图片被压缩 */
 }
-/* 4️⃣ logo 文字本身 */
+
+/* 4️⃣ logo 文字 - 添加移动端适配 */
 .logo {
-  font-size: 24px;      /* 比导航文字大一号 */
-  font-weight: bold;    /* 加粗 */
-  color: #333;       /* 华为经典红 */
-  text-decoration: none;/* 去掉默认下划线 */
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;   /* 新增：防止换行 */
 }
 
-/* 5️⃣ 中间菜单 <ul> 容器 */
+/* 5️⃣ 中间菜单容器 */
 .nav__center {
-  display: flex;        /* 横排菜单项 */
-  flex-wrap: wrap;      /* 关键：宽度不足时自动换行 */
-  gap: var(--gap);      /* 使用变量，统一间隙 */
-  justify-content: center; /* 居中对齐，看着更整齐 */
-  list-style: none;     /* 去掉小黑点 */
-  margin: 0;            /* 去掉默认 margin */
-  padding: 0;           /* 去掉默认 padding */
-  max-width: 720px;     /* 最大宽度，防止屏幕太宽时拉得太开 */
+  display: flex;
+  gap: var(--gap);
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* 6️⃣ 菜单里的单个 <a> 链接 */
+/* 6️⃣ 菜单项 - 改为flex子项 */
+.nav__center li {
+  display: flex;          /* 新增：让li也成为flex容器 */
+  align-items: center;    /* 新增：垂直居中 */
+}
+
 .nav__center a {
-  text-decoration: none;/* 关键：去掉下划线，简洁 */
-  font-size: 17px;      /* 2. 单独再放大一点，突出可点性 */
-  color: #333;          /* 深灰色，比纯黑柔和 */
-  white-space: nowrap;  /* 不换行，保持一行显示 */
+  text-decoration: none;
+  font-size: 16px;        /* 调整：17px改为16px更合适 */
+  color: #333;
+  white-space: nowrap;
+  padding: 8px 4px;       /* 新增：增加可点击区域 */
 }
 
 /* 7️⃣ 右侧搜索框区域 */
 .nav__right {
-  margin-left: auto;    /* 自动把左侧元素顶开，实现“靠右” */
+  margin-left: auto;
+  display: flex;          /* 新增：flex布局 */
+  align-items: center;    /* 新增：垂直居中 */
 }
 
-/* 8️⃣ 搜索输入框本身 */
+/* 8️⃣ 搜索框 - 添加过渡效果 */
 .search {
-  width: 140px;         /* 固定宽度，小屏也够用 */
-  padding: 6px 10px;    /* 上下 6 左右 10，让文字不贴边 */
-  border: 1px solid #ccc;/* 浅灰边框 */
-  border-radius: 4px;   /* 轻微圆角，柔和视觉 */
+  width: 140px;
+  padding: 8px 12px;      /* 调整：增加padding更好点击 */
+  border: 1px solid #ddd; /* 调整：更浅的边框色 */
+  border-radius: 20px;    /* 调整：更圆的边框 */
+  transition: all 0.3s ease;
 }
 
-/* 9️⃣ 平板/手机端：屏幕 ≤ 768px 时的隐藏策略 */
-@media (max-width: 768px) {
-  .nav__center { display: none; } /* 横排菜单先藏起来，后面用抽屉 */
-  .nav__right  { display: none; } /* 搜索框也藏起来，抽屉里会复制一份 */
+.search:focus {
+  width: 160px;           /* 新增：聚焦时变宽 */
+  border-color: #333;
+  outline: none;
 }
 
-/* 🔟 汉堡按钮（三条横线）本体 */
+/* ========== 移动端适配 ========== */
+
+/* 9️⃣ 汉堡按钮 - 优化移动端体验 */
 #hamburger {
-  display: none;        /* 默认在桌面端隐藏 */
-  margin-left: auto;    /* 靠最右 */
-  cursor: pointer;      /* 手指手势，提示可点 */
-  padding: 6px;         /* 增大点击区域，移动端更好点 */
-  z-index: 201;         /* 保证在抽屉之上，不会被遮挡 */
+  display: none;          /* 桌面端隐藏 */
+  margin-left: 16px;      /* 调整：增加左边距 */
+  cursor: pointer;
+  padding: 12px 8px;      /* 调整：更大的点击区域 */
+  background: none;
+  border: none;
+  z-index: 201;
 }
+
 #hamburger span {
-  display: block;       /* 每条横线都是块级 */
-  width: 22px;          /* 统一宽度 */
-  height: 2px;          /* 统一厚度 */
-  margin: 5px 0;        /* 上下 5px 间距，形成三条线 */
-  background: #333;     /* 深灰色，与文字同色系 */
-  transition: .3s;      /* 过渡动画，开关更顺滑 */
+  display: block;
+  width: 24px;            /* 调整：稍微加宽 */
+  height: 2px;
+  margin: 4px 0;          /* 调整：间距减小 */
+  background: #333;
+  transition: 0.3s;
+  border-radius: 2px;     /* 新增：圆角端点 */
 }
 
-/* 1️⃣1️⃣ 小屏时才让汉堡按钮出现 */
+/* 汉堡按钮悬停效果 */
+#hamburger:hover span {
+  background: #666;
+}
+
+/* 🔟 移动端样式 (≤768px) */
 @media (max-width: 768px) {
-  #hamburger { display: block; }
+  /* 导航容器调整 */
+  .nav {
+    padding: 0 16px;      /* 减少左右padding */
+    height: 56px;         /* 稍微降低高度 */
+  }
+  
+  /* logo文字缩小 */
+  .logo {
+    font-size: 18px;      /* 移动端减小字号 */
+  }
+  
+  .logo-icon {
+    width: 22px;          /* 移动端图标也缩小 */
+    height: 22px;
+  }
+  
+  /* 隐藏桌面菜单和搜索框 */
+  .nav__center,
+  .nav__right {
+    display: none;
+  }
+  
+  /* 显示汉堡按钮 */
+  #hamburger {
+    display: block;
+  }
+  
+  /* 搜索框在移动端样式 */
+  .search {
+    width: 100%;          /* 抽屉内搜索框占满宽度 */
+    margin-top: 16px;
+    padding: 12px 16px;   /* 移动端更大padding */
+    border-radius: 25px;  /* 更圆的边框 */
+  }
+  
+  /* 导航左侧区域自适应 */
+  .nav__left {
+    gap: 6px;             /* 移动端缩小间距 */
+  }
 }
 
-/* 1️⃣2️⃣ 抽屉容器：固定定位，右侧滑入 */
+/* 1️⃣1️⃣ 小手机特殊适配 (≤480px) */
+@media (max-width: 480px) {
+  .nav {
+    padding: 0 12px;
+  }
+  
+  .logo {
+    font-size: 16px;      /* 超小屏幕进一步缩小 */
+  }
+  
+  .logo-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  #hamburger {
+    padding: 10px 6px;
+  }
+  
+  #hamburger span {
+    width: 22px;
+  }
+}
+
+/* 1️⃣2️⃣ 抽屉菜单样式 */
 #navDrawer {
-  position: fixed;      /* 相对于视口固定，不随页面滚动 */
-  inset: 0 0 0 auto;    /* 上右下都是 0，左边自动 = 贴右边缘 */
-  width: 260px;         /* 抽屉宽度 */
-  height: 100vh;        /* 满屏高度 */
-  background: #fff;     /* 与白底导航保持一致 */
-  box-shadow: -2px 0 6px rgba(0, 0, 0, .08); /* 左侧阴影，增强层级 */
-  transform: translateX(100%); /* 初始状态：完全藏到屏幕右侧 */
-  transition: transform .3s;   /* 滑入滑出动画 */
-  z-index: 200;         /* 低于汉堡按钮，高于普通内容 */
-  display: flex;        /* 内部用纵列排布 */
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: 280px;           /* 调整为更合适的宽度 */
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 20px rgba(0, 0, 0, 0.15); /* 加深阴影 */
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); /* 贝塞尔曲线动画 */
+  z-index: 200;
+  display: flex;
   flex-direction: column;
-  padding: 60px 24px 24px; /* 顶部留 60px 避免被系统状态栏/刘海遮挡 */
+  padding: 80px 24px 24px; /* 顶部留更多空间 */
+  overflow-y: auto;       /* 内容过多时可滚动 */
 }
-/* 抽屉打开时的状态 */
-#navDrawer.open { transform: translateX(0); }
 
-/* 1️⃣3️⃣ 遮罩层：全屏半透明黑 */
-#drawerMask {
-  position: fixed;      /* 全屏固定 */
-  inset: 0;             /* 上下左右全 0，占满视口 */
-  background: rgba(0, 0, 0, .45); /* 45% 透明黑，聚焦抽屉 */
-  opacity: 0;           /* 默认全透明 = 看不见 */
-  visibility: hidden;   /* 同时隐藏，防止误点 */
-  transition: .3s;      /* 与抽屉同步过渡 */
-  z-index: 199;         /* 低于抽屉，高于页面内容 */
+/* 抽屉打开状态 */
+#navDrawer.open { 
+  transform: translateX(0); 
 }
-/* 抽屉打开时，让遮罩出现 */
+
+/* 抽屉内菜单样式 */
+#navDrawer .nav__center {
+  display: flex !important;
+  flex-direction: column;
+  gap: 12px;              /* 减少间距 */
+  margin: 0 0 24px;
+  padding: 0;
+  width: 100%;
+}
+
+/* 抽屉内菜单项 */
+#navDrawer .nav__center li {
+  width: 100%;
+  border-bottom: 1px solid #f0f0f0; /* 添加分隔线 */
+}
+
+/* 抽屉内菜单链接 */
+#navDrawer .nav__center a {
+  display: block;
+  width: 100%;
+  padding: 16px 8px;      /* 更大的可点击区域 */
+  font-size: 17px;        /* 移动端稍大字号 */
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+/* 抽屉内链接悬停/点击效果 */
+#navDrawer .nav__center a:hover,
+#navDrawer .nav__center a:active {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+/* 抽屉内搜索框区域 */
+#navDrawer .nav__right {
+  display: block !important;
+  width: 100%;
+  margin: 0;
+}
+
+/* 1️⃣3️⃣ 遮罩层 */
+#drawerMask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* 加深遮罩 */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 199;
+}
+
 #navDrawer.open ~ #drawerMask {
   opacity: 1;
   visibility: visible;
 }
 
-/* 1️⃣4️⃣ 抽屉内部的菜单：强制纵列排列 */
-#navDrawer .nav__center {
-  display: flex !important;   /* 在小屏被隐藏过，这里要强制显示 */
-  flex-direction: column;     /* 关键：竖着排 */
-  gap: 20px;                  /* 上下间距 20px，比横排更宽松 */
-  margin: 0 0 30px;           /* 底部再留 30px，与搜索框分开 */
-  max-width: none;            /* 去掉横排时的宽度限制，撑满抽屉 */
+/* 1️⃣4️⃣ 关闭按钮（可选，在抽屉内添加） */
+.drawer-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  z-index: 202;
 }
-/* 抽屉内部的搜索框：恢复可见、去掉自动外边距 */
-#navDrawer .nav__right {
-  display: block !important;
-  margin: 0;                  /* 重置 margin，让搜索框贴左 */
+
+.drawer-close:hover {
+  color: #333;
 }

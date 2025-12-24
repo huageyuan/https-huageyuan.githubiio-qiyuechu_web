@@ -1,5 +1,13 @@
 @charset "UTF-8";                       /* 告诉浏览器：此文件使用 UTF-8 编码，防止中文乱码 */
-
+/* ========== 全局变量 ========== */
+:root {
+  /* 定义CSS自定义属性（CSS变量），方便统一管理和响应式调整 */
+  --section-padding: 40px; /* 区块的内边距 */
+  --card-padding: 60px;    /* 卡片容器的内边距 */
+  --gap: 60px;             /* 元素之间的间隔 */
+  --radius: 20px;          /* 圆角半径 */
+  --mobile-padding: 20px;  /* 移动端的内边距 */
+}
 /*========== 通用Reset：先把所有标签“剃光头” ==========*/
 * {                                      /* 通配符：选中页面上每一个元素 */
   margin: 0;                             /* 清除浏览器默认外边距 */
@@ -14,19 +22,4 @@ body {                                   /* 整个网页的身体 */
                                          /* 字体优先级：苹果系统→Win系统→通用无衬线，中英文都好看 */
   background: #f7f7f9;                   /* 整个页面背景：浅灰色，护眼不刺眼 */
   overflow-x: hidden;                    /* 禁止横向滚动条，防止内容撑破屏幕 */
-}
-
-/*========== 移动端适配：≤768px 生效 ==========*/
-@media (max-width: 768px) {
-
-  .content-container {                   /* 卡片改为上下堆叠，适合手机窄屏 */
-    flex-direction: column;
-    padding: 40px 30px;
-  }
-  .main-title {                          /* 字号缩小，防止换行丑陋 */
-    font-size: 36px;
-  }
-  .subtitle {
-    font-size: 20px;
-  }
 }

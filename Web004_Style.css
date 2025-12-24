@@ -1,26 +1,145 @@
-/*========== 主视觉大背景区域 ==========*/
-.web04-container {                        /* 全屏大图容器 */
-  margin-top: 80px;                      /* 避开顶部固定导航80px，防止被遮挡 */
-  min-height: calc(100vh - 80px);        /* 至少占满“屏幕高度-80px”，保证背景图始终铺满可视区 */
-  display: flex;                         /* Flex布局，让子元素（卡片）居中 */
-  align-items: center;                   /* 垂直居中 */
-  justify-content: center;               /* 水平居中 */
-  padding: 40px;                         /* 内边距40px，避免卡片贴边 */
+/*========== 主视觉区域 ==========*/
+.web04-container {
+  padding-top: 80px;        /* 顶部内边距，通常用于为固定导航栏留出空间 */
+  min-height: 200px;        /* 设置合适的最小高度 */
+  display: flex;            /* 启用Flexbox布局 */
+  justify-content: center;  /* 水平居中子元素 */
+  align-items: center;      /* 垂直居中子元素 */
+  padding: var(--section-padding); /* 使用变量设置内边距 */
+  background: #f0f4f7;
+  box-sizing: border-box;   /* 重要：确保内边距计算在总尺寸内 */
 }
 
 .web04-box {
-    width: 100%;                 /* 占满卡片宽度 */
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;               /* 图片本身再居中 */
-    justify-content: center;
+    width: 100%;                 /* 占满容器宽度 */
+    display: flex;               /* 启用Flexbox布局 */
+    justify-content: center;     /* 水平居中 */
+    align-items: center;         /* 垂直居中 */
+    max-width: 1200px;           /* 添加最大宽度限制，防止在大屏幕上过大 */
+    text-align: center;          /* 文字居中对齐 */
 }
 
-.web04-box img {
-    /* 图片本身 */
-    width: 85%;
-    height: auto;
-    /* 高度自动，等比缩放不变形 */
-    display: block;
-    /* 去掉图片底部默认3px缝隙，防止出现白边 */
+.web04-title {
+    font-size: 2.2rem;           /* 调整为适中的字体大小 */
+    font-weight: 600;            /* 字体粗细为中等偏粗 */
+    color: #333;                 /* 字体颜色为深灰色 */
+    margin: 0;                   /* 清除默认外边距 */
+    line-height: 1.3;            /* 合适的行高 */
+    letter-spacing: 1px;         /* 字符间距 */
+    text-transform: uppercase;   /* 转换为大写字母 */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08); /* 添加轻微文字阴影 */
+    animation: fadeIn 0.8s ease-out; /* 添加淡入动画 */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* 系统字体 */
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== 移动端适配 ========== */
+
+/* 平板设备 (769px - 1024px) */
+@media (max-width: 1024px) {
+  .web04-container {
+    padding-top: 60px;           /* 调整顶部内边距 */
+    min-height: 180px;           /* 调整最小高度 */
+    padding: 30px 20px;          /* 调整内边距，覆盖变量设置 */
+  }
+  
+  .web04-title {
+    font-size: 1.9rem;           /* 调整字体大小 */
+  }
+}
+
+/* 移动端 (≤768px) */
+@media (max-width: 768px) {
+  .web04-container {
+    padding-top: 50px;           /* 进一步减少顶部内边距 */
+    min-height: 160px;           /* 调整最小高度 */
+    padding: 20px 15px;          /* 减少内边距 */
+  }
+  
+  .web04-title {
+    font-size: 1.7rem;           /* 调整字体大小 */
+    letter-spacing: 0.5px;       /* 调整字符间距 */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); /* 减少阴影强度 */
+  }
+}
+
+/* 小手机设备 (≤480px) */
+@media (max-width: 480px) {
+  .web04-container {
+    padding-top: 40px;           /* 进一步减少顶部内边距 */
+    min-height: 140px;           /* 调整最小高度 */
+    padding: 15px 10px;          /* 进一步减少内边距 */
+  }
+  
+  .web04-title {
+    font-size: 1.5rem;           /* 进一步调整字体大小 */
+    letter-spacing: 0.3px;       /* 调整字符间距 */
+    text-transform: none;        /* 小屏幕上取消大写转换 */
+  }
+}
+
+/* 超小手机设备 (≤375px) */
+@media (max-width: 375px) {
+  .web04-container {
+    padding-top: 35px;
+    padding: 10px 8px;
+    min-height: 120px;           /* 调整最小高度 */
+  }
+  
+  .web04-title {
+    font-size: 1.4rem;           /* 进一步调整字体大小 */
+  }
+}
+
+/* 横屏适配 */
+@media (orientation: landscape) and (max-height: 600px) {
+  .web04-container {
+    min-height: 160px;           /* 调整最小高度 */
+    padding: 15px;
+    padding-top: 60px;           /* 保持顶部间距 */
+  }
+  
+  .web04-title {
+    font-size: 1.8rem;           /* 横屏时稍微增大字体 */
+  }
+}
+
+/* 高分辨率屏幕适配 */
+@media (min-width: 1440px) {
+  .web04-title {
+    font-size: 2.5rem;           /* 在大屏幕上稍微增大字体 */
+  }
+}
+
+/* 防止在放大时内容溢出 */
+@media (max-width: 700px) {
+  .web04-box {
+    overflow: hidden;            /* 防止内容溢出 */
+  }
+}
+
+/* 打印样式 */
+@media print {
+  .web04-container {
+    background: none;            /* 打印时移除背景色 */
+    padding-top: 20px;           /* 减少打印时的顶部间距 */
+    min-height: auto;            /* 打印时取消最小高度 */
+  }
+  
+  .web04-title {
+    color: #000;                 /* 打印时使用纯黑色 */
+    text-shadow: none;           /* 移除文字阴影 */
+    font-size: 2rem;             /* 打印时适当调整字体大小 */
+  }
 }

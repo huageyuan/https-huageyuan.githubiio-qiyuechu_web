@@ -1,11 +1,12 @@
-/* 整个解决方案板块：至少撑满一屏，纯白底，深灰字，居中排版 */
-.Web02-container  {
-  min-height: 100vh;          /* 最低一屏高，用户必须下滑才看得见 */
-  display: flex;              /* Flex 布局，方便上下左右居中 */
-  align-items: center;        /* 垂直居中 */
-  justify-content: center;    /* 水平居中 */
-  padding: 80px 40px;         /* 上下 80px、左右 40px 留白，避免贴边 */
-  color: #333;              /* 文字颜色改为深灰，提升阅读舒适度 */
+
+.Web02-container {
+  padding-top: 80px; /* 顶部内边距，通常用于为固定导航栏留出空间 */
+  min-height: calc(100vh - 80px); /* 最小高度为视口高度减去80px，确保区域至少充满屏幕 */
+  display: flex; /* 启用Flexbox布局 */
+  justify-content: center; /* 水平居中子元素 */
+  align-items: center; /* 垂直居中子元素 */
+  padding: var(--section-padding); /* 使用变量设置内边距 */
+  background: #f0f4f7;
 }
 
 /* 内容包裹层：最大 1200px 宽，左右自动留白，Flex 横向排列，图文之间 60px 间距 */
@@ -17,7 +18,6 @@
   align-items: center;        /* 如果两侧高度不一致，也保持垂直居中 */
 }
 
-/* 左侧图片区域：固定占 66% 宽度，圆角 + 隐藏溢出，保证图片不会撑破圆角 */
 .web02-left {
   flex: 0 0 66%;              /* 不放大、不缩小、基准 66% */
   border-radius: 12px;        /* 12px 圆角，柔和过渡 */
@@ -28,8 +28,6 @@
   height: auto;               /* 高度自动，保持原始比例 */
   display: block;             /* 去掉图片底部幽灵空白 */
 }
-
-/* 右侧文字区域：剩余空间全部给它（34%），放标题、段落、卖点、按钮 */
 .web02-right {
   flex: 1;                    /* 占满剩余空间 */
 }
@@ -68,7 +66,7 @@
   color: #e60012;             /* 企业红，强调品牌色 */
 }
 
-/* “了解更多”按钮： inline-block 方便设置 padding，圆角 4px，悬停变深红 */
+/* "了解更多"按钮：放在 .web02-right 内部作为最后一个元素 */
 .web02-more-btn {
   display: inline-block;      /* 既能设宽高又不会独占一行 */
   padding: 10px 28px;         /* 上下 10、左右 28，按钮看起来不挤 */
@@ -80,4 +78,226 @@
 }
 .web02-more-btn:hover {
   background: #c40010;        /* 悬停时深一点，增加交互反馈 */
+}
+
+/* ========== 移动端适配 ========== */
+
+/* 媒体查询：当视口宽度小于等于768px时应用以下样式（移动端） */
+@media (max-width: 768px) {
+  .Web02-container {
+    padding: 60px 20px; /* 调整内边距，顶部留出导航栏空间 */
+    min-height: auto; /* 取消最小高度限制 */
+  }
+  
+  .web02-container {
+    flex-direction: column; /* 将Flex容器的主轴方向改为垂直（列） */
+    padding: 30px; /* 调整内边距 */
+    gap: 0; /* 重置间隔，我们手动控制 */
+    text-align: center; /* 文字居中对齐 */
+  }
+  
+  /* 关键：使用 order 属性改变Flex子项的显示顺序 */
+  .web02-left {
+    order: 2; /* 将图片的显示顺序设置为2（排在第二位，在文字下方） */
+    flex: 0 0 auto; /* 重置flex属性：不伸缩，基础大小由内容决定 */
+    width: 100%; /* 宽度占满父容器 */
+    max-width: 100%; /* 最大宽度为100% */
+    min-width: 0; /* 清除最小宽度限制，适应小屏幕 */
+    margin-top: 30px; /* 与上方文字保持距离 */
+    margin-bottom: 30px; /* 与下方按钮保持距离 */
+  }
+  
+  .web02-right {
+    order: 1; /* 将文字内容的显示顺序设置为1（排在第一位，即最上方） */
+    flex: 0 0 auto; /* 重置flex属性 */
+    width: 100%; /* 宽度占满父容器 */
+    max-width: 100%; /* 最大宽度为100% */
+    min-width: 0; /* 清除最小宽度限制 */
+    text-align: left; /* 移动端文字左对齐更易读 */
+  }
+  
+  /* 关键：将按钮从 .web02-right 中分离出来，放在图片下方 */
+  .web02-more-btn {
+    order: 3; /* 按钮显示顺序为3，在图片下方 */
+    width: 100%; /* 按钮全宽显示 */
+    text-align: center; /* 按钮文字居中 */
+    display: block; /* 改为块级元素 */
+    margin-top: 0; /* 重置上边距 */
+  }
+  
+  .web02-left img {
+    min-height: 250px; /* 调整图片最小高度 */
+    max-height: 400px; /* 限制图片最大高度，防止过长 */
+    object-fit: cover; /* 保持比例覆盖容器 */
+  }
+  
+  .web02-right h2 {
+    font-size: 13px; /* 调整副标题字体大小 */
+    text-align: center; /* 移动端居中对齐 */
+    letter-spacing: 1px; /* 调整字符间距 */
+  }
+  
+  .web02-right h3 {
+    font-size: 1.8rem; /* 调整主标题字体大小 */
+    line-height: 1.3; /* 调整标题行高 */
+    text-align: center; /* 移动端居中对齐 */
+  }
+  
+  .web02-right p {
+    font-size: 1.2rem; /* 调整正文字体大小 */
+    text-align: left; /* 正文左对齐 */
+    line-height: 1.6; /* 调整行高 */
+    margin-bottom: 20px; /* 减少下边距 */
+  }
+  
+  .web02-selling-points {
+    margin-bottom: 20px; /* 减少下边距 */
+  }
+  
+  .web02-selling-points li {
+    text-align: left; /* 列表项左对齐 */
+    font-size: 14px; /* 调整卖点字体大小 */
+  }
+}
+
+/* 平板设备 (宽度在769px到1024px之间) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .Web02-container {
+    padding: 60px 30px; /* 调整内边距 */
+    min-height: auto; /* 取消最小高度限制 */
+  }
+  
+  .web02-container {
+    flex-direction: column; /* 平板也改为垂直排列 */
+    padding: 30px;
+    gap: 0; /* 重置间隔 */
+    text-align: center;
+  }
+  
+  /* 保持文字(1) → 图片(2) → 按钮(3)的顺序 */
+  .web02-left {
+    order: 2; /* 图片在中间 */
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .web02-right {
+    order: 1; /* 文字在最上面 */
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    text-align: left; /* 平板端文字左对齐 */
+  }
+  
+  /* 关键：按钮在图片下方 */
+  .web02-more-btn {
+    order: 3; /* 按钮在最下面 */
+    width: auto; /* 平板按钮宽度自适应 */
+    display: block; /* 块级显示 */
+    margin: 0 auto; /* 水平居中 */
+  }
+  
+  .web02-left img {
+    min-height: 250px;
+    max-height: 400px;
+    object-fit: cover;
+  }
+  
+  .web02-right h2 {
+    font-size: 13px;
+    text-align: center; /* 平板居中对齐 */
+  }
+  
+  .web02-right h3 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+    text-align: center; /* 平板居中对齐 */
+  }
+  
+  .web02-right p {
+    font-size: 1.2rem;
+    text-align: left; /* 正文左对齐 */
+    margin-bottom: 20px;
+  }
+  
+  .web02-selling-points {
+    margin-bottom: 20px;
+  }
+  
+  .web02-selling-points li {
+    text-align: left;
+    font-size: 14px;
+  }
+}
+
+/* 小手机设备 (宽度小于等于480px) */
+@media (max-width: 480px) {
+  .Web02-container {
+    padding: 15px; /* 进一步减少内边距 */
+    padding-top: 50px; /* 调整顶部内边距 */
+  }
+  
+  .web02-container {
+    padding: 20px; /* 调整卡片内边距 */
+    gap: 0; /* 重置间隔 */
+    border-radius: 15px; /* 调整圆角半径 */
+  }
+  
+  /* 调整顺序：文字(1) → 图片(2) → 按钮(3) */
+  .web02-left {
+    order: 2; /* 图片在中间 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .web02-right {
+    order: 1; /* 文字在最上方 */
+  }
+  
+  .web02-more-btn {
+    order: 3; /* 按钮在最下方 */
+    width: 100%; /* 小屏幕按钮全宽 */
+    padding: 12px 24px; /* 调整按钮内边距 */
+    font-size: 14px; /* 调整按钮文字大小 */
+    display: block; /* 块级显示 */
+  }
+  
+  .web02-left img {
+    min-height: 200px; /* 进一步调整图片最小高度 */
+    max-height: 300px; /* 进一步限制图片最大高度 */
+  }
+  
+  .web02-right h2 {
+    font-size: 12px; /* 进一步调整副标题字体大小 */
+  }
+  
+  .web02-right h3 {
+    font-size: 1.6rem; /* 进一步调整主标题字体大小 */
+  }
+  
+  .web02-right p {
+    font-size: 1.1rem; /* 进一步调整正文字体大小 */
+    margin-bottom: 15px;
+  }
+  
+  .web02-selling-points {
+    margin-bottom: 15px;
+  }
+  
+  .web02-selling-points li {
+    font-size: 13px; /* 进一步调整卖点字体大小 */
+  }
+}
+
+/* 浏览器放大保护（当视口宽度小于等于700px时） */
+@media (max-width: 700px) {
+  /* 确保在用户放大页面时，布局也能正常换行处理 */
+  .web02-container {
+    flex-wrap: wrap; /* 允许Flex子项换行 */
+  }
 }

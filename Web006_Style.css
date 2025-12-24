@@ -1,39 +1,239 @@
-.Web06-container {                        /* 全屏大图容器 */
-  margin-top: 80px;                      /* 避开顶部固定导航80px，防止被遮挡 */
-  min-height: calc(100vh - 80px);        /* 至少占满“屏幕高度-80px”，保证背景图始终铺满可视区 */
-  display: flex;                         /* Flex布局，让子元素（卡片）居中 */
-  align-items: center;                   /* 垂直居中 */
-  justify-content: center;               /* 水平居中 */
-  padding: 40px;                         /* 内边距40px，避免卡片贴边 */
+/* ========== 主视觉区域 ========== */
+.Web06-container {
+  flex-direction: column;   /* 让文字与图条自动上下排布 */
+  padding-top: 80px;        /* 顶部内边距，通常用于为固定导航栏留出空间 */
+  min-height: auto; /* 最小高度为视口高度减去80px，确保区域至少充满屏幕 */
+  display: flex; /* 启用Flexbox布局 */
+  justify-content: center; /* 水平居中子元素 */
+  align-items: center; /* 垂直居中子元素 */
+  padding: var(--section-padding); /* 使用变量设置内边距 */
+  background: #f0f4f7;
+  box-sizing: border-box;   /* 重要：确保内边距计算在总尺寸内 */
 }
-/*========== 实色悬浮卡片（无模糊） ==========*/
+
+/* ========== 卡片容器 ========== */
 .web06-container {
-    width: 100%;
-    max-width: 1500px;
-    display: flex;
-    flex-direction: row-reverse;   /* 关键：整体顺序反转 → 右图左字 */
-    gap: 60px;
-    align-items: center;
-    padding: 60px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.15);
-    border: 1px solid rgba(0,0,0,0.05);
+  width: 100%; /* 宽度占满父容器 */
+  max-width: 1500px; /* 最大宽度限制，防止在大屏幕上过宽 */
+  display: flex; /* 启用Flexbox布局 */
+  flex-direction: row-reverse; /* 关键：整体顺序反转 → 右图左字 */
+  gap: 60px; /* 使用变量设置子元素之间的间隔 */
+  align-items: center; /* 垂直居中对齐子元素 */
+  padding: 60px; /* 使用变量设置内边距 */
+  background: #ffffff; /* 白色背景 */
+  border-radius: 20px; /* 使用变量设置圆角 */
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15); /* 添加阴影，营造深度感 */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* 添加一个非常浅的边框 */
 }
 
-/*========== 右侧图 66% ==========*/
-.web06-right-box {          /* 类名顺手改成 right-box，语义对应 */
-    flex: 0 0 66%;
-    border-radius: 12px;
-    overflow: hidden;
+/* ========== 右侧图片区域 - 66% ========== */
+.web06-right-box {
+  flex: 0 0 66%; /* Flex项目不伸缩，基础宽度占容器的66% */
+  min-width: 300px; /* 设置最小宽度，防止内容过小时布局混乱 */
+  border-radius: 12px; /* 设置圆角 */
+  overflow: hidden; /* 隐藏超出圆角边框的部分（如图片） */
 }
+
 .web06-right-box img {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%; /* 图片宽度填满容器 */
+  height: auto; /* 高度自动，保持原始宽高比 */
+  display: block; /* 将图片设为块级元素，避免下方产生间隙 */
+  object-fit: cover; /* 覆盖整个容器，可能裁剪图片，保持比例 */
+  min-height: 300px; /* 设置图片最小高度 */
 }
 
-/*========== 左侧文字 34% ==========*/
+/* ========== 左侧文字区域 - 34% ========== */
 .web06-text-content {
-    flex: 1;            /* 剩余空间全给文字，现在它在左边 */
+  flex: 1; /* 剩余空间全给文字，现在它在左边 */
+  min-width: 250px; /* 设置最小宽度 */
+  padding: 20px 0; /* 设置上下内边距，左右为0 */
+  
+  /* 为子元素动画效果定义的CSS变量 */
+  --delay-step: 0.15s; /* 每个子元素动画延迟的递进步长 */
+  --line-index: 0; /* 用于计算动画延迟的索引变量，初始为0 */
+}
+
+/* 定义一个名为 fadeUp 的关键帧动画 */
+@keyframes fadeUp {
+  0% {
+    opacity: 0; /* 起始状态：完全透明 */
+    transform: translateY(2rem) scale(0.96); /* 起始状态：向下移动2rem并轻微缩小 */
+  }
+  100% {
+    opacity: 1; /* 结束状态：完全不透明 */
+    transform: translateY(0) scale(1); /* 结束状态：回到原始位置和大小 */
+  }
+}
+
+/* 选择 .web06-text-content 下的所有直接子元素 */
+.web06-text-content > * {
+  opacity: 0; /* 初始状态设为透明，等待动画触发 */
+  /* 应用 fadeUp 动画，持续1.7秒，使用特定的缓动函数，结束后保持结束状态 */
+  animation: fadeUp 1.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  /* 设置动画延迟：基于 `--line-index` 变量和 `--delay-step` 计算 */
+  animation-delay: calc(var(--line-index) * var(--delay-step));
+  /* 增加 counter 计数器的值，用于标记每个子元素的行号 */
+  counter-increment: line;
+  /* 将 `--line-index` 变量的值设置为当前计数器的值 */
+  --line-index: counter(line);
+}
+
+/* 标题样式 */
+.web06-text-content h1 {
+  font-size: 2.5rem; /* 字体大小 */
+  font-weight: 700; /* 字体粗细为粗体 */
+  line-height: 1.2; /* 行高 */
+  margin: 0 0 0.4em; /* 外边距：上右下左，下边距为0.4个字体大小 */
+  color: #333; /* 字体颜色为深灰色 */
+}
+
+/* 段落样式 */
+.web06-text-content p {
+  font-size: 1.3rem; /* 字体大小 */
+  color: #666; /* 字体颜色为中灰色 */
+  margin-top: 1.5rem; /* 上外边距 */
+  font-weight: 500; /* 字体粗细为中等 */
+  letter-spacing: 2px; /* 字符间距 */
+  line-height: 1.6; /* 添加行高提高可读性 */
+}
+
+/* ========== 关键修改：768px以下垂直排列，文字在上 ========== */
+/* 媒体查询：当视口宽度小于等于768px时应用以下样式（移动端） */
+@media (max-width: 768px) {
+  .Web06-container {
+    padding: 30px; /* 使用移动端内边距变量 */
+    padding-top: 60px; /* 调整顶部内边距 */
+    min-height: auto; /* 取消最小高度限制 */
+    margin-top: 60px; /* 调整顶部外边距 */
+  }
+  
+  .web06-container {
+    flex-direction: column; /* 将Flex容器的主轴方向改为垂直（列） */
+    padding: 30px; /* 调整内边距 */
+    gap: 30px; /* 调整子元素间隔 */
+    text-align: center; /* 文字居中对齐 */
+  }
+  
+  /* 关键：使用 order 属性改变Flex子项的显示顺序 */
+  .web06-right-box {
+    order: 2; /* 将图片的显示顺序设置为2（排在第二位，即下方） */
+    flex: 0 0 auto; /* 重置flex属性：不伸缩，基础大小由内容决定 */
+    width: 100%; /* 宽度占满父容器 */
+    max-width: 100%; /* 最大宽度为100% */
+    min-width: 0; /* 清除最小宽度限制，适应小屏幕 */
+  }
+  
+  .web06-text-content {
+    order: 1; /* 将文字内容的显示顺序设置为1（排在第一位，即上方） */
+    flex: 0 0 auto; /* 重置flex属性 */
+    width: 100%; /* 宽度占满父容器 */
+    max-width: 100%; /* 最大宽度为100% */
+    min-width: 0; /* 清除最小宽度限制 */
+  }
+  
+  .web06-right-box img {
+    min-height: 250px; /* 调整图片最小高度 */
+    max-height: 400px; /* 限制图片最大高度，防止过长 */
+  }
+  
+  .web06-text-content h1 {
+    font-size: 1.8rem; /* 调整标题字体大小 */
+    line-height: 1.3; /* 调整标题行高 */
+  }
+  
+  .web06-text-content p {
+    font-size: 1.2rem; /* 调整段落字体大小 */
+    margin-top: 1rem; /* 调整段落上外边距 */
+    letter-spacing: 1px; /* 调整段落字符间距 */
+    line-height: 1.5; /* 调整行高 */
+  }
+}
+
+/* 平板设备 (宽度在769px到1024px之间) 保持左右布局，稍微调整 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .Web06-container {
+    padding: 30px; /* 使用移动端内边距变量 */
+    padding-top: 60px; /* 调整顶部内边距 */
+    min-height: auto; /* 取消最小高度限制 */
+    margin-top: 60px; /* 调整顶部外边距 */
+  }
+  
+  .web06-container {
+    flex-direction: column; /* 将Flex容器的主轴方向改为垂直（列） */
+    padding: 30px; /* 调整内边距 */
+    gap: 30px; /* 调整子元素间隔 */
+    text-align: center; /* 文字居中对齐 */
+  }
+  
+  /* 关键：使用 order 属性改变Flex子项的显示顺序 */
+  .web06-right-box {
+    order: 2; /* 将图片的显示顺序设置为2（排在第二位，即下方） */
+    flex: 0 0 auto; /* 重置flex属性：不伸缩，基础大小由内容决定 */
+    width: 100%; /* 宽度占满父容器 */
+    max-width: 100%; /* 最大宽度为100% */
+    min-width: 0; /* 清除最小宽度限制，适应小屏幕 */
+  }
+  
+  .web06-text-content {
+    order: 1; /* 将文字内容的显示顺序设置为1（排在第一位，即上方） */
+    flex: 0 0 auto; /* 重置flex属性 */
+    width: 100%; /* 宽度占满父容器 */
+    max-width: 100%; /* 最大宽度为100% */
+    min-width: 0; /* 清除最小宽度限制 */
+  }
+  
+  .web06-right-box img {
+    min-height: 250px; /* 调整图片最小高度 */
+    max-height: 400px; /* 限制图片最大高度，防止过长 */
+  }
+  
+  .web06-text-content h1 {
+    font-size: 1.8rem; /* 调整标题字体大小 */
+    line-height: 1.3; /* 调整标题行高 */
+  }
+  
+  .web06-text-content p {
+    font-size: 1.2rem; /* 调整段落字体大小 */
+    margin-top: 1rem; /* 调整段落上外边距 */
+    letter-spacing: 1px; /* 调整段落字符间距 */
+    line-height: 1.5; /* 调整行高 */
+  }
+}
+
+/* 小手机设备 (宽度小于等于480px) */
+@media (max-width: 480px) {
+  .Web06-container {
+    padding: 15px; /* 进一步减少内边距 */
+    padding-top: 50px; /* 调整顶部内边距 */
+    margin-top: 50px; /* 调整顶部外边距 */
+  }
+  
+  .web06-container {
+    padding: 20px; /* 调整卡片内边距 */
+    gap: 25px; /* 调整子元素间隔 */
+    border-radius: 15px; /* 调整圆角半径 */
+  }
+  
+  .web06-right-box img {
+    min-height: 200px; /* 进一步调整图片最小高度 */
+    max-height: 300px; /* 进一步限制图片最大高度 */
+  }
+  
+  .web06-text-content h1 {
+    font-size: 1.6rem; /* 进一步调整标题字体大小 */
+  }
+  
+  .web06-text-content p {
+    font-size: 1.1rem; /* 进一步调整段落字体大小 */
+    letter-spacing: 0.5px; /* 进一步调整字符间距 */
+    line-height: 1.4; /* 调整行高 */
+  }
+}
+
+/* 浏览器放大保护（当视口宽度小于等于700px时） */
+@media (max-width: 700px) {
+  /* 确保在用户放大页面时，布局也能正常换行处理 */
+  .web06-container {
+    flex-wrap: wrap; /* 允许Flex子项换行 */
+  }
 }

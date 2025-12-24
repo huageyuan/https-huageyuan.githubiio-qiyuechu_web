@@ -1,74 +1,11 @@
-.web05-container {
-    width: 100%;
-    max-width: 1500px;
-    display: flex;
-    flex-direction: row-reverse;   /* 关键：整体顺序反转 → 右图左字 */
-    gap: 20px;
-    align-items: center;
-    padding: 200px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.15);
-    border: 1px solid rgba(0,0,0,0.05);
-}
-/* 2. 四卡片容器：占满可视宽，两边贴齐 */
-.web05-four-cards {
-  width: 90%;              /* = 视口宽 */
-  box-sizing: border-box;
-  display: flex;
-  gap: 20px;                /* 固定间隙 */
-  padding: 0 20px;          /* 只在最左最右留 20px 呼吸线 */
-  flex-wrap: nowrap;        /* 强制不换行，必须并排 */
-}
-
-/* 3. 单卡片：自动等分剩余空间，间隙固定 */
-.web05-card {
-  flex: 1 1 0;              /* flex-basis=0 → 宽度完全按剩余空间等分 */
-  min-width: 0;             /* 防止内容撑爆 */
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,.12);
-}
-/* 图片区：优先缩小，最小给文字留 60px */
-.web05-pic-box{
-  flex: 1 1 auto;        /* 可放大、可缩小，基准 auto */
-  min-height: 0;         /* 允许被压缩到 0，防止 flex 死守内容高度 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fafafa;
-}
-.web05-pic-box img{
-  width: 80%;
-  height: auto;
-  max-height: 180px;     /* 关键：封顶 180px，防止超高图撑爆卡片 */
-  display: block;
-  object-fit: contain;   /* 保证完整图比例 */
-}
-
-/* 文字区：最小 48px（约两行），需要时自动撑高 */
-.web05-txt-box{
-  flex: 0 0 auto;        /* 不放大，但允许被内容撑开 */
-  min-height: 48px;      /* 最低两行字，不会压成一条缝 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #333;
-  background: #fff;
-}
-
 .web05-product-row{
-  display:flex;
-  gap:16px;
-  max-width:1200px;
-  margin:0 auto;
-  list-style:none;
-  padding:0;
+  padding-top: 80px; /* 顶部内边距，通常用于为固定导航栏留出空间 */
+  min-height: auto; /* 最小高度为视口高度减去80px，确保区域至少充满屏幕 */
+  display: flex; /* 启用Flexbox布局 */
+  justify-content: center; /* 水平居中子元素 */
+  align-items: center; /* 垂直居中子元素 */
+  padding: var(--section-padding); /* 使用变量设置内边距 */
+  background: #f0f4f7;
 }
 .web05-product-card{
   flex:1 1 0;
@@ -84,6 +21,14 @@
   box-shadow:0 4px 16px rgba(0,0,0,.12);
 }
 
+/* ====== 卡片链接 ====== */
+.web05-card-link{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  height:100%;
+}
+
 /* ====== 图片 ====== */
 .web05-product-card img{
   width:100%;
@@ -92,43 +37,61 @@
   background:#fff;    /* 留白区域颜色 */
 }
 
-/* ====== 底部文字 & 按钮 ====== */
+/* ====== 底部文字 ====== */
 .web05-card-footer{
   padding:16px;
-  display:grid;
-  grid-template:
-    "title  price" auto
-    "btn1   btn2" auto
-    / 1fr   auto;
-  gap:8px 12px;
-  align-items:center;
 }
 .web05-card-footer h3{
-  grid-area:title;
-  font-size:16px;font-weight:500;color:#000;
-}
-.web05-price{
-  grid-area:price;
-  font-size:18px;font-weight:700;color:#000;
-}
-.web05-btn{
-  grid-area:btn1;
-  justify-self:start;
-  padding:6px 16px;
-  font-size:14px;
-  border:1px solid #000;
-  border-radius:4px;
+  font-size:16px;
+  font-weight:500;
   color:#000;
-  text-decoration:none;
-  transition:.2s;
+  margin:0;
 }
-.web05-btn.primary{
-  grid-area:btn2;
-  background:#000;color:#fff;
+/* =============== 移动端补丁（≤768px） =============== */
+@media (max-width: 768px) {
+  /* 1. 父级：放弃等分 & 垂直居中 */
+  .web05-product-row {
+    display: flex;
+    flex-wrap: wrap;          /* 允许换行 */
+    gap: 12px;                /* 统一空隙 */
+    justify-content: center;  /* 水平居中 */
+    align-items: stretch;     /* 卡片同高 */
+    min-height: auto;         /* 去掉强制一屏高 */
+    padding: 20px 12px;       /* 上下留呼吸感 */
+  }
+
+  /* 2. 卡片：两列，宽度自动减去 gap */
+  .web05-product-card {
+    flex: 0 0 calc(50% - 6px); /* 6px = gap/2 */
+    max-width: calc(50% - 6px);
+    display: flex;            /* 让卡片本身也 flex，方便 footer 对齐 */
+    flex-direction: column;
+  }
+
+  /* 3. 图片：统一 4:3 比例 + 留白背景 */
+  .web05-product-card img {
+    aspect-ratio: 4 / 3;      /* 比 1:1 更扁，整体更协调 */
+    object-fit: contain;      /* 完整展示，留白处用卡片底色 */
+    background: #fff;
+  }
+
+  /* 4. 底部文字：最小高度对齐，防止标题行数不同导致错位 */
+  .web05-card-footer {
+    padding: 12px;
+    flex: 1 0 auto;           /* 把剩余空间吸过来，保证同名卡片同高 */
+    display: flex;
+    align-items: center;      /* 垂直居中标题 */
+  }
+  .web05-card-footer h3 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
 }
-.web05-btn:hover{
-  background:#000;color:#fff;
-}
-.web05-btn.primary:hover{
-  background:#333;border-color:#333;
+
+/* =============== 更小屏（≤360px）单列 fallback =============== */
+@media (max-width: 360px) {
+  .web05-product-card {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }

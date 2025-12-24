@@ -1,9 +1,11 @@
-/* ===== 静态并排版 ===== */
+/* ===== 静态并排版 - 移动端可滑动 ===== */
 
 /* 智慧场景标题居中 */
 .web07 {
   text-align: center;
-  padding: 40px 20px;
+  padding: 40px 0;
+  overflow: hidden; /* 防止整体溢出 */
+  position: relative;
 }
 
 .web07-title {
@@ -23,8 +25,10 @@
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  padding: 0 20px;
 }
 
+/* 桌面端样式保持原样 */
 .web07-list {
   display: flex;
   flex-wrap: wrap;
@@ -43,6 +47,7 @@
   cursor: pointer;
   transform-origin: center;
   transition: transform .35s, box-shadow .35s;
+  flex-shrink: 0; /* 防止卡片被压缩 */
 }
 
 .web07-card:hover {
@@ -108,14 +113,78 @@
   color: #000;
 }
 
-/* 小屏自适应 */
-@media (max-width: 767px) {
+/* 导航按钮样式 */
+.web07-nav {
+  display: none;
+}
+
+/* 移动端样式 - 可滑动的水平布局 */
+@media (max-width: 1024px) {
+  .web07 {
+    padding: 40px 0 60px;
+  }
+  
+  .web07-list-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .web07-list {
+    display: flex;
+    flex-wrap: nowrap; /* 不换行，保持水平 */
+    justify-content: flex-start; /* 左对齐 */
+    gap: 16px;
+    padding: 0 16px;
+    margin: 0;
+    max-width: none;
+    overflow-x: auto; /* 允许水平滚动 */
+    overflow-y: hidden;
+    scrollbar-width: none; /* Firefox隐藏滚动条 */
+    -ms-overflow-style: none; /* IE/Edge隐藏滚动条 */
+    -webkit-overflow-scrolling: touch; /* iOS平滑滚动 */
+    scroll-snap-type: x mandatory; /* 启用滚动吸附 */
+    padding-bottom: 20px; /* 给滚动条留空间 */
+    scroll-behavior: smooth; /* 平滑滚动 */
+  }
+  
+  /* 隐藏滚动条但保持可滚动 */
+  .web07-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* 每个卡片作为滚动吸附点 */
   .web07-card {
-    width: 260px;
+    scroll-snap-align: center; /* 滚动时对齐中心 */
+    width: 280px; /* 移动端卡片宽度 */
+    flex-shrink: 0; /* 防止卡片被压缩 */
+    margin-bottom: 0;
   }
   
   .web07-card img {
-    height: 480px;
+    height: 480px; /* 移动端图片高度 */
+  }
+  
+  /* 第一个和最后一个卡片增加边距，使其在滚动时能居中显示 */
+  .web07-card:first-child {
+    margin-left: calc(50% - 140px); /* 居中第一个卡片 */
+  }
+  
+  .web07-card:last-child {
+    margin-right: calc(50% - 140px); /* 居中最后一个卡片 */
+  }
+  
+  /* 移动端悬停效果调整 */
+  .web07-card:hover {
+    transform: none; /* 移动端移除缩放效果 */
+  }
+  
+  /* 移动端点击显示遮罩 */
+  .web07-card.active .web07-card-mask {
+    transform: translateY(0);
+  }
+  
+  .web07-card.active .web07-card-desc {
+    opacity: 1;
   }
   
   .web07-title {
@@ -125,5 +194,159 @@
   .web07-sub {
     font-size: 14px;
     padding: 0 15px;
+  }
+  
+  /* 移动端导航按钮 */
+  .web07-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 25px;
+  }
+  
+  .web07-nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 18px;
+    user-select: none;
+  }
+  
+  .web07-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .web07-nav-btn:active {
+    transform: scale(0.95);
+  }
+  
+  .web07-nav-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .web07-nav-btn.disabled:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 指示器样式 */
+  .web07-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  .web07-indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .web07-indicator-dot.active {
+    background: #333;
+    transform: scale(1.2);
+  }
+  
+  /* 左右渐变遮罩 */
+  .web07-fade-left,
+  .web07-fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 20px;
+    width: 60px;
+    pointer-events: none;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .web07-fade-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+    justify-content: flex-start;
+    padding-left: 10px;
+  }
+  
+  .web07-fade-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+    justify-content: flex-end;
+    padding-right: 10px;
+  }
+  
+  .web07-fade-left.show,
+  .web07-fade-right.show {
+    opacity: 1;
+  }
+  
+  /* 遮罩内的箭头 */
+  .web07-fade-arrow {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    color: #333;
+    font-size: 16px;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+}
+
+/* 更小屏幕的微调 */
+@media (max-width: 480px) {
+  .web07-card {
+    width: 260px;
+  }
+  
+  .web07-card:first-child {
+    margin-left: calc(50% - 130px);
+  }
+  
+  .web07-card:last-child {
+    margin-right: calc(50% - 130px);
+  }
+  
+  .web07-card img {
+    height: 440px;
+  }
+  
+  .web07-fade-left,
+  .web07-fade-right {
+    width: 50px;
+  }
+  
+  .web07-nav {
+    gap: 30px;
+  }
+  
+  .web07-nav-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
   }
 }

@@ -2,236 +2,300 @@
 <html lang="zh-CN"> <!-- 根元素，指定页面语言为简体中文 -->
 
 <head> <!-- 头部区域，包含元数据、标题、样式表等，不会直接显示在页面上 -->
-  <meta charset="UTF-8" /> <!-- 设置字符编码为 UTF-8，支持全球大部分语言字符，防止中文乱码 -->
+    <meta charset="UTF-8" /> <!-- 设置字符编码为 UTF-8，支持全球大部分语言字符，防止中文乱码 -->
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- 移动端视口设置：宽度等于设备宽度，初始缩放比例 1.0，确保手机端正常显示 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 移动端视口设置：宽度等于设备宽度，初始缩放比例 1.0，确保手机端正常显示 -->
 
-  <title>蛋壳城--爱的守护</title> <!-- 浏览器标签页上显示的标题文字 -->
+    <title>蛋壳城--爱的守护</title> <!-- 浏览器标签页上显示的标题文字 -->
 
-  <!-- 以下所有 link 标签均用于引入外部资源，rel="icon" 表示网站小图标，rel="stylesheet" 表示 CSS 样式表 -->
-  <link rel="icon" href="z_logo.ico" type="image/x-icon" /> <!-- 指定浏览器标签页、收藏夹中显示的小图标路径及类型 -->
+    <!-- 以下所有 link 标签均用于引入外部资源，rel="icon" 表示网站小图标，rel="stylesheet" 表示 CSS 样式表 -->
+    <link rel="icon" href="picture/z_logo.ico" type="image/x-icon" /> <!-- 指定浏览器标签页、收藏夹中显示的小图标路径及类型 -->
 
-  <!-- 基础公共样式，通常存放全局重置、通用布局等规则 -->
-  <link rel="stylesheet" href="style.css" />
+    <!-- 基础公共样式，通常存放全局重置、通用布局等规则 -->
+    <link rel="stylesheet" href="style.css" />
 
-  <!-- 导航栏专用样式，若站点导航复杂，可独立维护 -->
-  <link rel="stylesheet" href="Navbar_Style.css" />
-  
-  <!-- 按模块划分的样式表，可针对具体页面或组件做细节调整，数字编号方便版本管理或分模块加载 -->
-  <link rel="stylesheet" href="Web001_Style.css" /> <!-- 模块/页面 001 的专用样式 -->
-  <link rel="stylesheet" href="Web002_Style.css" /> <!-- 模块/页面 002 的专用样式 -->
-  <link rel="stylesheet" href="Web003_Style.css" /> <!-- 模块/页面 003 的专用样式 -->
-  <link rel="stylesheet" href="Web004_Style.css" /> <!-- 模块/页面 004 的专用样式 -->
-  <link rel="stylesheet" href="Web005_Style.css" /> <!-- 模块/页面 005 的专用样式 -->
-  <link rel="stylesheet" href="Web006_Style.css" /> <!-- 模块/页面 006 的专用样式 -->
-  <link rel="stylesheet" href="Web007_Style.css" /> <!-- 模块/页面 006 的专用样式 --> 
+    <!-- 导航栏专用样式，若站点导航复杂，可独立维护 -->
+    <link rel="stylesheet" href="Navbar_Style.css" />
+
+    <!-- 按模块划分的样式表，可针对具体页面或组件做细节调整，数字编号方便版本管理或分模块加载 -->
+    <link rel="stylesheet" href="Web001_Style.css" /> <!-- 模块/页面 001 的专用样式 -->
+    <link rel="stylesheet" href="Web002_Style.css" /> <!-- 模块/页面 002 的专用样式 -->
+    <link rel="stylesheet" href="Web003_Style.css" /> <!-- 模块/页面 003 的专用样式 -->
+    <link rel="stylesheet" href="Web004_Style.css" /> <!-- 模块/页面 004 的专用样式 -->
+    <link rel="stylesheet" href="Web005_Style.css" /> <!-- 模块/页面 005 的专用样式 -->
+    <link rel="stylesheet" href="Web006_Style.css" /> <!-- 模块/页面 006 的专用样式 -->
+    <link rel="stylesheet" href="Web007_Style.css" /> <!-- 模块/页面 006 的专用样式 -->
 
 </head>
+
 <body>
-    <!-- 顶部导航 -->
-  <div class="nav">
-    <div class="nav__left">
-        <img class="logo-icon" src="z_logo.png" alt="公司logo" />
-        <a class = "logo">七月初数字科技</a>
-    </div>
+    <!-- 在您的HTML中添加这些部分 -->
+    <div class="nav">
+        <div class="nav__left">
+            <img class="logo-icon" src="picture/z_logo.png" alt="公司logo" />
+            <span class="logo">七月初数字科技</span> <!-- 改为span，因为不是链接 -->
+        </div>
 
-    <ul class="nav__center">
-      <li><a href="#">产品服务</a></li>
-      <li><a href="#">解决方案</a></li>
-      <li><a href="#">关于我们</a></li>
-      <li><a href="#">新闻中心</a></li>
-    </ul>
-
-    <div class="nav__right">
-      <input class="search" type="text" placeholder="搜索">
-    </div>
-  </div>
-  
-  <section class="Web01-container">
-    <div class="web01-container">
-
-      <div class="web01-left-box">
-        <img src="z_web01_tu.png" alt="" />
-      </div>
-
-      <div class="web01-text-content">
-        <h1>科技隐形 爱意显形</h1> 
-        <h1>自在养老 蛋壳随行</h1> 
-        <div>安心·相伴·懂你</div> 
-      </div>
-    </div>
-  </section>
-
-  <section class="Web02-container">
-    <div class="web02-container">
-      <div class="web02-left">
-        <img src="z_web02_tu.png" alt="AI云守护平台">
-      </div>
-
-      <div class="web02-right">
-        <h3>解决方案<h3>
-        <p>
-          聚焦“AI+养老”领域的科技企业，以智能算法与技术创新为核心，打造“AI+
-          多模态硬件 + 养老 + 全生态智慧家居”融合模式。通过人工智能技术优化
-          居家养老场景，为智慧城市高质量发展提供了数字化解决方案与创新动力。
-        </p>
-
-        <ul class="web02-selling-points">
-          <li>精准选型 · 解决养老核心痛点</li>
-          <li>设备兼容性强 · 安装操作简便</li>
-          <li>设备自主研发 · 使用场景丰富</li>
+        <ul class="nav__center">
+            <li><a href="#">产品服务</a></li>
+            <li><a href="#">解决方案</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">新闻中心</a></li>
         </ul>
-        <a href="#" class="web02-more-btn">了解更多</a>
-      </div>
-    </div>
-  </section>
 
-<section class="web03-center-box">
-  <h2 class="web03-headline">使用场景</h2>
-  <div class="web03-overlap-bar">
-    <!-- 缩略图列表 -->
-    <div class="web03-item">
-      <img class="web03-thumb" src="z_web03_tu_bathroom.png" alt="卫生间"
-           data-full="z_web03_tu_bathroom.png" onclick="showLarge(this.dataset.full)">
-      <span class="web03-title">卫生间</span>
-    </div>
-    <div class="web03-item">
-      <img class="web03-thumb" src="z_web03_tu_Bedroom.png" alt="卧室"
-           data-full="z_web03_tu_Bedroom.png" onclick="showLarge(this.dataset.full)">
-      <span class="web03-title">卧室</span>
-    </div>
-    <div class="web03-item">
-      <img class="web03-thumb" src="z_web03_tu_Kitchen.png" alt="厨房"
-           data-full="z_web03_tu_Kitchen.png" onclick="showLarge(this.dataset.full)">
-      <span class="web03-title">厨房</span>
-    </div>
-    <div class="web03-item">
-      <img class="web03-thumb" src="z_web03_tu_Livingroom.png" alt="客厅"
-           data-full="z_web03_tu_Livingroom.png" onclick="showLarge(this.dataset.full)">
-      <span class="web03-title">客厅</span>
-    </div>
-  </div>
+        <div class="nav__right">
+            <input class="search" type="text" placeholder="搜索">
+        </div>
 
-  <!-- 唯一全屏遮罩（默认隐藏） -->
-  <div id="web03-overlay" class="web03-overlay" onclick="hideLarge()">
-    <img id="web03-large" src="" alt="">
-  </div>
-</section>
-  
-<section class="web04-container">
-      <div class="web04-box">
-        <img src="z_web04_tu.png" alt="智慧家居" />
-    </div>
-</section>
- <section>
-<ul class="web05-product-row">
-  <!-- 卡片 1 -->
-  <li class="web05-product-card">
-    <img src="z_web05_tu_1.png" alt="AI隐私式摄像头">
-    <div class="web05-card-footer">
-      <h3>AI隐私式摄像头</h3>
-      <a class="web05-btn" href="#">了解更多</a>
-    </div>
-  </li>
-
-  <!-- 卡片 2 -->
-  <li class="web05-product-card">
-    <img src="z_web05_tu_2.png" alt="AI摄像头">
-    <div class="web05-card-footer">
-      <h3>AI摄像头</h3>
-      <a class="web05-btn" href="#">了解更多</a>
-    </div>
-  </li>
-
-  <!-- 卡片 3 -->
-  <li class="web05-product-card">
-    <img src="z_web05_tu_3.png" alt="智能门磁">
-    <div class="web05-card-footer">
-      <h3>智能门磁</h3>
-      <a class="web05-btn" href="#">了解更多</a>
-    </div>
-  </li>
-
-  <!-- 卡片 4 -->
-  <li class="web05-product-card">
-    <img src="z_web05_tu_4.png" alt="可燃气体浓度数据采集器">
-    <div class="web05-card-footer">
-      <h3>可燃气体浓度数据采集器</h3>
-      <a class="web05-btn" href="#">了解更多</a>
-    </div>
-  </li>
-</ul>
-  </section>
-
-  <section class="Web06-container">
-    <div class="web06-container">
-      <div class="web06-right-box">
-        <img src="z_web06_tu.png" alt="软件app" />
-      </div>
-
-      <div class="web06-text-content">
-        <h1>软件平台</h1> <!-- 主标题 -->
-        <p>
-          AI实时针对用水、用电、燃气安全等多维度实时数据进行实时监控及分析，
-          一旦触发异常，系统及时启动声光报警并推送信息用户及紧急联系人，同时
-          自动联动社区、物业及消防部门，构建监测预警与应急处置一体化安全住宅
-          防护体系。
-        </p>
-      </div>
-    </div>
-  </section>
-
-<se section class="web07">
-  <h2 class="web07-title">智慧场景</h2>
-  <p class="web07-sub">一键多设备智能联动，留意各种生活情景需求</p>
-
-  <div class="web07-list">
-    <!-- 卡片 1 -->
-    <div class="web07-card">
-      <img src="z_web07_tu_1.png" alt="">
-      <div class="web07-card-mask">
-        <div class="web07-card-title">用水用电－数据高度可视</div>
-        <div class="web07-card-desc">通过可视化图形描述生活水电，为水电赋予形态。</div>
-        <a class="web07-card-btn" href="#">了解更多</a>
-      </div>
+        <!-- 汉堡按钮 -->
+        <button id="hamburger" aria-label="导航菜单">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
 
-    <!-- 卡片 2 -->
-    <div class="web07-card">
-      <img src="z_web07_tu_2.png" alt="">
-      <div class="web07-card-mask">
-        <div class="web07-card-title">健康监测－身体一目了然</div>
-        <div class="web07-card-desc">温和柔光身体数据可视，健康是否一目了然。</div>
-        <a class="web07-card-btn" href="#">了解更多</a>
-      </div>
-    </div>
+    <!-- 抽屉菜单 -->
+    <div id="navDrawer">
+        <button class="drawer-close" aria-label="关闭菜单">×</button>
 
-    <!-- 卡片 3 -->
-    <div class="web07-card">
-      <img src="z_web07_tu_3.png" alt="">
-      <div class="web07-card-mask">
-        <div class="web07-card-title">视频守护</div>
-        <div class="web07-card-desc">隐私视频摄像头，处处监控处处贴心。</div>
-        <a class="web07-card-btn" href="#">了解更多</a>
-      </div>
-    </div>
+        <ul class="nav__center">
+            <li><a href="#">产品服务</a></li>
+            <li><a href="#">解决方案</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">新闻中心</a></li>
+        </ul>
 
-    <!-- 卡片 4 -->
-    <div class="web07-card">
-      <img src="z_web07_tu_4.png" alt="">
-      <div class="web07-card-mask">
-        <div class="web07-card-title">燃气监测</div>
-        <div class="web07-card-desc">一键开启全天放心模式，安全与呵护同步律动。</div>
-        <a class="web07-card-btn" href="#">了解更多</a>
-      </div>
+        <div class="nav__right">
+            <input class="search" type="text" placeholder="搜索">
+        </div>
     </div>
-  </div>
-</section>
+    <!-- 遮罩层 -->
+    <div id="drawerMask"></div>
+    <section class="Web01-container">
+        <div class="web01-container">
 
+            <!-- 左侧图片 -->
+            <div class="web01-left-box">
+                <img src="picture/z_web01_tu.png" alt="科技隐形爱意显形，自在养老蛋壳随行" />
+            </div>
+
+            <div class="web01-text-content">
+                <h1>
+                    <span class="line">科技隐形 爱意显形</span>
+
+                </h1>
+                <h1>
+
+                    <span class="line">自在养老 蛋壳随行</span>
+                </h1>
+                <div class="subtitle">安心·相伴·懂你</div>
+            </div>
+    </section>
+    <section class="Web02-container">
+        <div class="web02-container">
+            <div class="web02-left">
+                <img src="picture/z_web02_tu.png" alt="AI云守护平台">
+            </div>
+
+            <div class="web02-right">
+                <h3>解决方案</h3>
+                <p>
+                    聚焦“AI+养老”领域的科技企业，以智能算法与技术创新为核心，打造“AI+
+                    多模态硬件 + 养老 + 全生态智慧家居”融合模式。通过人工智能技术优化
+                    居家养老场景，为智慧城市高质量发展提供了数字化解决方案与创新动力。
+                </p>
+
+                <ul class="web02-selling-points">
+                    <li>精准选型 · 解决养老核心痛点</li>
+                    <li>设备兼容性强 · 安装操作简便</li>
+                    <li>设备自主研发 · 使用场景丰富</li>
+                </ul>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="web03-center-box">
+        <h2 class="web03-headline">使用场景</h2>
+        <div class="web03-overlap-bar">
+            <!-- 缩略图列表 -->
+            <div class="web03-item">
+                <img class="web03-thumb" src="picture/z_web03_tu_bathroom.png" alt="卫生间"
+                    data-full="picture/z_web03_tu_bathroom.png" onclick="showLarge(this.dataset.full)">
+                <span class="web03-title">卫生间</span>
+            </div>
+            <div class="web03-item">
+                <img class="web03-thumb" src="picture/z_web03_tu_Bedroom.png" alt="卧室"
+                    data-full="picture/z_web03_tu_Bedroom.png" onclick="showLarge(this.dataset.full)">
+                <span class="web03-title">卧室</span>
+            </div>
+            <div class="web03-item">
+                <img class="web03-thumb" src="picture/z_web03_tu_Kitchen.png" alt="厨房"
+                    data-full="picture/z_web03_tu_Kitchen.png" onclick="showLarge(this.dataset.full)">
+                <span class="web03-title">厨房</span>
+            </div>
+            <div class="web03-item">
+                <img class="web03-thumb" src="picture/z_web03_tu_Livingroom.png" alt="客厅"
+                    data-full="picture/z_web03_tu_Livingroom.png" onclick="showLarge(this.dataset.full)">
+                <span class="web03-title">客厅</span>
+            </div>
+        </div>
+
+        <!-- 轮播控制按钮（移动端显示） -->
+        <div class="web03-carousel-controls">
+            <button class="web03-prev-btn" aria-label="上一张">‹</button>
+            <div class="web03-indicators"></div>
+            <button class="web03-next-btn" aria-label="下一张">›</button>
+        </div>
+
+        <!-- 唯一全屏遮罩（默认隐藏） -->
+        <div id="web03-overlay" class="web03-overlay" onclick="hideLarge()">
+            <img id="web03-large" src="" alt="">
+        </div>
+    </section>
+
+    <section class="web04-container">
+        <div class="web04-box">
+            <h1 class="web04-title">产品介绍</h1>
+        </div>
+    </section>
+
+    <section>
+        <ul class="web05-product-row">
+            <!-- 卡片 1 -->
+            <li class="web05-product-card">
+                <a href="https://www.kookapp.cn/app/channels/7115522006777852/2811222796349997" class="web05-card-link">
+                    <img src="picture/z_web05_tu_1.png" alt="AI隐私式摄像头">
+                    <div class="web05-card-footer">
+                        <h3>AI隐私式摄像头</h3>
+                    </div>
+                </a>
+            </li>
+
+            <!-- 卡片 2 -->
+            <li class="web05-product-card">
+                <a href="https://lol.qq.com/download.shtml" class="web05-card-link">
+                    <img src="picture/z_web05_tu_2.png" alt="AI摄像头">
+                    <div class="web05-card-footer">
+                        <h3>AI摄像头</h3>
+                    </div>
+                </a>
+            </li>
+
+            <!-- 卡片 3 -->
+            <li class="web05-product-card">
+                <a href="https://weixin.qq.com/" class="web05-card-link">
+                    <img src="picture/z_web05_tu_3.png" alt="智能门磁">
+                    <div class="web05-card-footer">
+                        <h3>智能门磁</h3>
+                    </div>
+                </a>
+            </li>
+
+            <!-- 卡片 4 -->
+            <li class="web05-product-card">
+                <a href="https://val.qq.com/main.html" class="web05-card-link">
+                    <img src="picture/z_web05_tu_4.png" alt="可燃气体浓度数据采集器">
+                    <div class="web05-card-footer">
+                        <h3>可燃气体浓度数据采集器</h3>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <section class="Web06-container">
+        <div class="web06-container">
+            <div class="web06-right-box">
+                <img src="picture/z_web06_tu.png" alt="软件app" />
+            </div>
+
+            <div class="web06-text-content">
+                <h1>软件平台</h1> <!-- 主标题 -->
+                <p>
+                    AI实时针对用水、用电、燃气安全等多维度实时数据进行实时监控及分析，
+                    一旦触发异常，系统及时启动声光报警并推送信息用户及紧急联系人，同时
+                    自动联动社区、物业及消防部门，构建监测预警与应急处置一体化安全住宅
+                    防护体系。
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="web07">
+        <h2 class="web07-title">智慧场景</h2>
+        <p class="web07-sub">一键多设备智能联动，留意各种生活情景需求</p>
+
+        <div class="web07-list-wrapper">
+            <!-- 左右渐变遮罩 -->
+            <div class="web07-fade-left">
+                <div class="web07-fade-arrow left-arrow">←</div>
+            </div>
+
+            <div class="web07-list">
+                <!-- 卡片 1 -->
+                <div class="web07-card">
+                    <img src="picture/z_web07_tu_1.png" alt="用水用电数据可视化">
+                    <div class="web07-card-mask">
+                        <div class="web07-card-title">用水用电－数据高度可视</div>
+                        <div class="web07-card-desc">通过可视化图形描述生活水电，为水电赋予形态。</div>
+                        <a class="web07-card-btn" href="#">了解更多</a>
+                    </div>
+                </div>
+
+                <!-- 卡片 2 -->
+                <div class="web07-card">
+                    <img src="picture/z_web07_tu_2.png" alt="健康监测">
+                    <div class="web07-card-mask">
+                        <div class="web07-card-title">健康监测－身体一目了然</div>
+                        <div class="web07-card-desc">温和柔光身体数据可视，健康是否一目了然。</div>
+                        <a class="web07-card-btn" href="#">了解更多</a>
+                    </div>
+                </div>
+
+                <!-- 卡片 3 -->
+                <div class="web07-card">
+                    <img src="picture/z_web07_tu_3.png" alt="视频守护">
+                    <div class="web07-card-mask">
+                        <div class="web07-card-title">视频守护</div>
+                        <div class="web07-card-desc">隐私视频摄像头，处处监控处处贴心。</div>
+                        <a class="web07-card-btn" href="#">了解更多</a>
+                    </div>
+                </div>
+
+                <!-- 卡片 4 -->
+                <div class="web07-card">
+                    <img src="picture/z_web07_tu_4.png" alt="燃气监测">
+                    <div class="web07-card-mask">
+                        <div class="web07-card-title">燃气监测</div>
+                        <div class="web07-card-desc">一键开启全天放心模式，安全与呵护同步律动。</div>
+                        <a class="web07-card-btn" href="#">了解更多</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="web07-fade-right">
+                <div class="web07-fade-arrow right-arrow">→</div>
+            </div>
+        </div>
+
+        <!-- 底部导航按钮和指示器 -->
+        <div class="web07-nav">
+            <button class="web07-nav-btn prev-btn">←</button>
+            <div class="web07-indicator">
+                <span class="web07-indicator-dot active" data-index="0"></span>
+                <span class="web07-indicator-dot" data-index="1"></span>
+                <span class="web07-indicator-dot" data-index="2"></span>
+                <span class="web07-indicator-dot" data-index="3"></span>
+            </div>
+            <button class="web07-nav-btn next-btn">→</button>
+        </div>
+    </section>
+
+
+    <script src="mainjs.js"></script>
 
 </body>
-<script src="mainjs.js"></script>
 
 </html>
-

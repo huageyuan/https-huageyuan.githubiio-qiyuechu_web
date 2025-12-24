@@ -1,19 +1,26 @@
+/* Web03组件样式 */
+
 .web03-center-box {
-  display: flex;
   flex-direction: column;   /* 让文字与图条自动上下排布 */
-  justify-content: center;  /* 整体仍然水平居中 */
-  align-items: center;      /* 整体仍然垂直居中 */
   padding: 0 24px;          /* 只保留左右留白，上下清零 */
+  padding-top: 80px; /* 顶部内边距，通常用于为固定导航栏留出空间 */
+  min-height: auto; /* 最小高度为视口高度减去80px，确保区域至少充满屏幕 */
+  display: flex; /* 启用Flexbox布局 */
+  justify-content: center; /* 水平居中子元素 */
+  align-items: center; /* 垂直居中子元素 */
+  padding: var(--section-padding); /* 使用变量设置内边距 */
+  background: #f0f4f7;
 }
 
 /* ====== 2. 居中文字 ====== */
 .web03-headline {
   margin-bottom: 20px;      /* 与下方图条留点呼吸距离，可随意调 */
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #333;
   text-align: center;       /* 保险起见，再写一次居中 */
 }
+
 /* 重叠图条外壳：所有图片横向排列，高度固定 400px，超出部分隐藏 */
 .web03-overlap-bar {
   position: relative; /* 作为内部绝对定位的包含块 */
@@ -22,7 +29,7 @@
   overflow: hidden;   /* 去掉横向滚动条 */
 }
 
-/* 单张图的外壳（label）：可点击，负边距实现“扑克牌”重叠 */
+/* 单张图的外壳（label）：可点击，负边距实现"扑克牌"重叠 */
 .web03-item {
   position: relative;   /* 给内部 .title 绝对定位当参照 */
   width: 700px;         /* 每张图展开宽度 */
@@ -92,4 +99,181 @@
   -moz-user-select: none;
   -ms-user-select: none;
   pointer-events: none;   /* 图片只负责展示，不拦截点击 */
+}
+
+/* ========== 移动端轮播适配 ========== */
+
+/* 平板和移动端适配 */
+@media (max-width: 1024px) {
+  .web03-center-box {
+    padding-top: 60px;
+    min-height: auto;
+    padding: 40px 20px;
+  }
+  
+  .web03-headline {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+  
+  .web03-overlap-bar {
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  
+  .web03-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    margin-left: 0 !important;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1;
+    filter: grayscale(0) brightness(1); /* 移动端直接显示彩色 */
+  }
+  
+  .web03-item.active {
+    opacity: 1;
+    z-index: 2;
+  }
+  
+  .web03-thumb {
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .web03-title {
+    font-size: 14px;
+    padding: 6px 12px;
+    background: rgba(0,0,0,.6);
+  }
+  
+  /* 移除桌面端的hover效果 */
+  .web03-item:hover {
+    filter: grayscale(0) brightness(1);
+    z-index: 2;
+  }
+}
+
+/* 移动端轮播控制按钮 */
+.web03-carousel-controls {
+  display: none; /* 默认隐藏，移动端显示 */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .web03-carousel-controls {
+    display: flex;
+  }
+}
+
+.web03-prev-btn,
+.web03-next-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.2s;
+  z-index: 100;
+}
+
+.web03-prev-btn:hover,
+.web03-next-btn:hover {
+  background: rgba(0,0,0,0.9);
+}
+
+.web03-prev-btn:active,
+.web03-next-btn:active {
+  transform: scale(0.95);
+}
+
+/* 轮播指示器 */
+.web03-indicators {
+  display: flex;
+  gap: 10px;
+  margin: 0 15px;
+}
+
+.web03-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  border: 2px solid transparent;
+}
+
+.web03-indicator.active {
+  background: rgba(0,0,0,0.8);
+  transform: scale(1.2);
+}
+
+.web03-indicator:hover {
+  background: rgba(0,0,0,0.4);
+}
+
+/* 小手机设备适配 */
+@media (max-width: 480px) {
+  .web03-center-box {
+    padding: 30px 15px;
+    padding-top: 50px;
+  }
+  
+  .web03-headline {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .web03-overlap-bar {
+    height: 250px;
+    max-width: 100%;
+  }
+  
+  .web03-prev-btn,
+  .web03-next-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .web03-indicator {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .web03-title {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+/* 触控设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  .web03-item {
+    cursor: default;
+  }
+  
+  .web03-prev-btn,
+  .web03-next-btn {
+    cursor: pointer;
+  }
 }
